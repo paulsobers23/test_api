@@ -14,23 +14,22 @@ RSpec.describe RegistrationsController, type: :request do
               }
       }
     end
-  end
 
-  it 'expects a 200 status' do
-    expect(response.status).to eq(200)
+    it 'expects a 200 status' do
+      expect(response.status).to eq(200)
+    end
 
-  end
+    it 'returns a token' do
+      expect(response.headers['Authorization']).to be_present
+    end
 
-  it 'returns a token' do
-    expect(response.headers['Authorization']).to be_present
-  end
+    it 'returns the user email' do
+      expect(json['data']).to have_attribute(:email).with_value(user.email)
+    end
 
-  it 'returns the user email' do
-    expect(json['data']).to have_attribute(:email).with_value(user.email)
-  end
-
-  it 'do not return user password' do
-    expect(json['data']).not_to have_attribute(:password).with_value(user.password)
+    it 'do not return user password' do
+      expect(json['data']).not_to have_attribute(:password).with_value(user.password)
+    end
   end
 
   context 'When a user already exists' do
