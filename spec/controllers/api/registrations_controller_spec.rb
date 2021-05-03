@@ -19,8 +19,9 @@ RSpec.describe RegistrationsController, type: :request do
       expect(response.status).to eq(200)
     end
 
-    it 'returns a token' do
-      expect(response.headers['Authorization']).to be_present
+    it 'returns a bearer token' do
+      token = response.headers['Authorization']
+      expect(token).to start_with("Bearer ")
     end
 
     it 'returns the user email' do
