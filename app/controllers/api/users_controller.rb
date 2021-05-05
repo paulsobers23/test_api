@@ -4,6 +4,7 @@ class Api::UsersController < Api::BaseController
   def show
     render_jsonapi_response(@user)
   end
+
   private
 
   def find_user

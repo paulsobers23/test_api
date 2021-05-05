@@ -17,22 +17,27 @@ describe Api::UsersController, type: :request do
       expect(json['data']).to have_id(user.id.to_s)
       expect(json['data']).to have_type('users')
     end
+  end
 
-    context 'When a user is missing' do
-      before do
-        login_with_api(user)
-        get "/api/users/test", headers: {'Authorization': response.headers['Authorization']}
-      end
-
-      it 'returns a 404' do
-        expect(response.status).to eq(404)
-      end
+  context 'When a user is missing' do
+    before do
+      login_with_api(user)
+      get "/api/users/test", headers: {'Authorization': response.headers['Authorization']}
     end
 
-    context 'When Authorization is missing' do
-      before do
-        get "/api/users/#{user.id}"
-      end
+    it 'returns a 404' do
+      expect(response.status).to eq(404)
+    end
+  end
+
+  TODO "Fix this test"
+  context 'When the Authorization header is missing' do
+    before do
+      get "/api/users/#{user.id}"
+    end
+
+    it 'returns 401' do
+      expect(response.status).to eq(401)
     end
   end
 end
