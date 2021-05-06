@@ -30,7 +30,6 @@ describe Api::UsersController, type: :request do
     end
   end
 
-  TODO "Fix this test"
   context 'When the Authorization header is missing' do
     before do
       get "/api/users/#{user.id}"
