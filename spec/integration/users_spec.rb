@@ -27,6 +27,7 @@ RSpec.describe 'Users Api', type: :request do
     get 'Return a User' do
       produces 'application/json'
       parameter name: :id, in: :path, type: :string
+      security [{ bearerAuth: []}]
       response '200', 'from the database successfully' do
         schema type: :object,
                properties: {
@@ -34,6 +35,7 @@ RSpec.describe 'Users Api', type: :request do
                  email: {type: :string},
                  password: {type: :string}},
                required: ['id', 'email', 'password']
+
 
         let (:id) {create_user.id}
         run_test!
